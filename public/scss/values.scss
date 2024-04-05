@@ -1,0 +1,77 @@
+/*  -------------------
+    C O L O R S
+-------------------  */
+
+$alpha: (
+  90: 0.9,
+  80: 0.8,
+  70: 0.7,
+  60: 0.6,
+  50: 0.5,
+  40: 0.4,
+  30: 0.3,
+  20: 0.2,
+  10: 0.1,
+);
+
+$button-theme: (
+  c1: #f0d552,
+  c2: #ff912b,
+  c3: #ff67b6,
+  c4: #c2ec44,
+  c5: #f86d6d,
+  c6: #6fe48c,
+  c7: #b9adff,
+);
+
+$dark-theme: (
+  color: #f2f2f2,
+  bg: #333333,
+  bg-light: #6e6e6e,
+  accent: #1a5bff,
+  accent-dark: #1a5bff,
+);
+
+$light-theme: (
+  color: #333333,
+  bg: #f2f2f2,
+  bg-light: #6e6e6e,
+  accent: #1a5bff,
+  accent-dark: #1a5bff,
+);
+
+/*  -------------------
+    S I Z E S
+-------------------  */
+
+$screen-xs: 480px !default;
+$screen-sm: 767px !default;
+$screen-md: 992px !default;
+$screen-lg: 1200px !default;
+$screen-xl: 1600px !default;
+
+/*  -------------------
+    M I X I N S
+-------------------  */
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin subheader {
+  font-size: 1rem;
+  line-height: 1em;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+@mixin genColorSet($colors) {
+  @each $color-space, $color-value in $colors {
+    --#{$color-space}: #{rgba($color-value, 1)};
+    @each $alpha-space, $alpha-value in $alpha {
+      --#{$color-space}-#{$alpha-space}: #{rgba($color-value, $alpha-value)};
+    }
+  }
+}

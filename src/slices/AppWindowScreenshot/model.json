@@ -1,0 +1,48 @@
+{
+  "id": "app_window_screenshot",
+  "type": "SharedSlice",
+  "name": "AppWindowScreenshot",
+  "description": "AppWindowScreenshot",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "light": {
+          "type": "Image",
+          "config": {
+            "label": "light",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "dark": {
+          "type": "Image",
+          "config": {
+            "label": "dark",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "device": {
+          "type": "Select",
+          "config": {
+            "label": "device",
+            "placeholder": "MacOS, iOS or Web",
+            "options": [
+              "MacOS",
+              "iOS",
+              "Web"
+            ],
+            "default_value": "MacOS"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

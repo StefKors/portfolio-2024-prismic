@@ -1,0 +1,1 @@
+export const imageSize = (size: number | undefined | null) => (size ?? 1000) / 4;

@@ -1,0 +1,13 @@
+.appscreenWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+    max-height: 100vh;
+    max-width: 100vw;
+    overflow: hidden;
+    opacity: 0.5;
+    /* transform: rotate(-19deg); */
+}
