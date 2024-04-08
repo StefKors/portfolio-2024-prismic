@@ -1,0 +1,17 @@
+.appIconGridCell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.appIconWrapper {
+    background-color: #ffffff20;
+    padding: 0;
+    border-radius: 40px;
+}
+
+.appIcon {
+    width: 160px;
+    height: 160px;
+    display: block;
+}

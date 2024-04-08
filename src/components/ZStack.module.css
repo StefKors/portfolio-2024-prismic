@@ -1,10 +1,10 @@
-.zstack > * {
-    grid-area: 1/1/1/1;
-}
+/*.zstack > * {*/
+/*    grid-area: 1/1/1/1;*/
+/*}*/
 
-.zstack {
-    display: grid;
-    place-items: center center;
-    width: 100vw;
-    height: 100vh;
-}
+/*.zstack {*/
+/*    display: grid;*/
+/*    place-items: center center;*/
+/*    width: 100vw;*/
+/*    height: 100vh;*/
+/*}*/

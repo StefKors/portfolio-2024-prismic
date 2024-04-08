@@ -1,16 +1,12 @@
 import AppScreenIOS from "@/components/AppScreenIOS";
 import AppScreenMacOS from "@/components/AppScreenMacOS";
-import {ProjectsDocument} from "../../prismicio-types";
+import {ProjectsDocument, ProjectsDocumentDataSlicesSlice} from "../../prismicio-types";
 
 interface AppScreenProps {
-    appPreview: ProjectsDocument
+    slice?: ProjectsDocumentDataSlicesSlice
 }
 
-const AppScreen = ({appPreview}: AppScreenProps) => {
-    const slice = appPreview?.data?.slices?.find((slice) => {
-        return slice.slice_type == "app_window_screenshot"
-    })
-
+const AppScreen = ({slice}: AppScreenProps) => {
     if (!slice) return
 
     // TODO: Support web

@@ -1,0 +1,27 @@
+{
+  "id": "app_icon",
+  "type": "SharedSlice",
+  "name": "AppIcon",
+  "description": "AppIcon",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "icon": {
+          "type": "Image",
+          "config": {
+            "label": "icon",
+            "constraint": {},
+            "thumbnails": []
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

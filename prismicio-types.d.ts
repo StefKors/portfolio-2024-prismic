@@ -520,6 +520,7 @@ export type JobDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<JobDocumentData>, "job", Lang>;
 
 type ProjectsDocumentDataSlicesSlice =
+  | AppIconSlice
   | ProjectImageSlice
   | AppWindowScreenshotSlice;
 
@@ -844,6 +845,51 @@ export type AllDocumentTypes =
   | ShowcaseDocument;
 
 /**
+ * Primary content in *AppIcon → Primary*
+ */
+export interface AppIconSliceDefaultPrimary {
+  /**
+   * icon field in *AppIcon → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: app_icon.primary.icon
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  icon: prismic.ImageField<never>;
+}
+
+/**
+ * Default variation for AppIcon Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type AppIconSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<AppIconSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *AppIcon*
+ */
+type AppIconSliceVariation = AppIconSliceDefault;
+
+/**
+ * AppIcon Shared Slice
+ *
+ * - **API ID**: `app_icon`
+ * - **Description**: AppIcon
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type AppIconSlice = prismic.SharedSlice<
+  "app_icon",
+  AppIconSliceVariation
+>;
+
+/**
  * Primary content in *AppWindowScreenshot → Primary*
  */
 export interface AppWindowScreenshotSliceDefaultPrimary {
@@ -1124,6 +1170,10 @@ declare module "@prismicio/client" {
       ShowcaseDocumentDataPlatformSupportItem,
       ShowcaseDocumentDataSlicesSlice,
       AllDocumentTypes,
+      AppIconSlice,
+      AppIconSliceDefaultPrimary,
+      AppIconSliceVariation,
+      AppIconSliceDefault,
       AppWindowScreenshotSlice,
       AppWindowScreenshotSliceDefaultPrimary,
       AppWindowScreenshotSliceVariation,

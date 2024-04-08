@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 
 export const components = {
+  app_icon: dynamic(() => import("./AppIcon")),
   app_window_screenshot: dynamic(() => import("./AppWindowScreenshot")),
   embed: dynamic(() => import("./GistEmbed")),
   feature_blocks: dynamic(() => import("./FeatureBlocks")),

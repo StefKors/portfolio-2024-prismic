@@ -28,44 +28,18 @@ const ThemeDependentImage = async ({alt = "", width, height, lightUrl, darkUrl}:
     // const dataUrl = await dynamicBlurDataUrl(buildURL(darkUrl, {fm: "webp", auto: "none", q: 1, w: 40 }))
 
     return (
-        // <div>
-        //     {lightUrl && <img
-        //         srcSet={generateSrcSet(lightUrl, width)}
-        //         src={defaultURL(lightUrl, width, 2)}
-        //         className={"hide-light"}
-        //         alt={alt}
-        //         width={width}
-        //         height={height}
-        //     />}
-        //     {darkUrl && <img
-        //         srcSet={generateSrcSet(darkUrl, width)}
-        //         src={defaultURL(darkUrl, width, 2)}
-        //         className={"hide-dark"}
-        //         alt={alt}
-        //         width={width}
-        //         height={height}
-        //     />}
-        // </div>
         <picture>
             {darkUrl && <source
                 media="(prefers-color-scheme: dark)"
                 srcSet={generateSrcSet(darkUrl, width)}
                 src={defaultURL(darkUrl, width, 2)}
-                // className={"hide-dark"}
-                // width={width}
-                // height={height}
             />}
             {lightUrl && <source
                 media="(prefers-color-scheme: light)"
                 srcSet={generateSrcSet(lightUrl, width)}
                 src={defaultURL(lightUrl, width, 2)}
-                // className={"hide-light"}
-                // width={width}
-                // height={height}
             />}
             <img alt={alt}
-                 // width={width}
-                 // height={height}
                  src={anyUrl}
             />
         </picture>
