@@ -2,7 +2,6 @@
 import useMeasure from "react-use-measure";
 import {motion, MotionConfig, MotionValue, SpringOptions, useMotionValue, useSpring, useTransform} from "framer-motion";
 import styles from "@/components/AppScreensOverview.module.css";
-import {useState} from "react";
 import ZStack from "@/components/ZStack";
 
 export function useSmoothTransform(value: MotionValue<number>, springOptions: SpringOptions, transformer: (value: number) => number) {
@@ -39,10 +38,10 @@ export const MouseScrollBehaviourWrapper = ({children, topLayer}: MouseScrollBeh
     });
 
     const topLayerLightRotateX = useSmoothTransform(mouseX, spring, (value: number) => {
-        return (-value - bounds.width / 2) /1.5
+        return ((-value - bounds.width / 2) / 1.5) - 400
     });
     const topLayerLightRotateY = useSmoothTransform(mouseY, spring, (value: number) => {
-        return (-value - bounds.height / 2) /1.5
+        return ((-value - bounds.height / 2) / 1.5) - 300
     });
 
     return (
@@ -60,7 +59,7 @@ export const MouseScrollBehaviourWrapper = ({children, topLayer}: MouseScrollBeh
                             className={styles.centerWrapper}
                             style={{
                                 x: childrenLightRotateX,
-                                y: childrenLightRotateY
+                                y: childrenLightRotateY,
                             }}
                         >
                             {children}

@@ -24,7 +24,7 @@ const AppScreensOverview = ({appPreviews}: AppScreensOverviewProps) => {
 
     const topLayer = (
         <div className={styles.appIconsLayer}>
-            {appIconsLayer.map((slice) => {
+            {[...appIconsLayer, ...appIconsLayer, ...appIconsLayer].map((slice) => {
                 return <AppIcon key={slice!.id} slice={slice} className={styles.iconRotation}/>
             })}
         </div>
@@ -34,7 +34,7 @@ const AppScreensOverview = ({appPreviews}: AppScreensOverviewProps) => {
     return (
         <MouseScrollBehaviourWrapper topLayer={topLayer}>
             <div className={styles.appScreensLayer}>
-                {appScreensLayer.map((slice) => {
+                {[...appScreensLayer, ...appScreensLayer, ...appScreensLayer].map((slice) => {
                     return <AppScreen key={slice!.id + "-2"} slice={slice}/>
                 })}
             </div>
