@@ -1,6 +1,7 @@
 import AppScreenIOS from "@/components/AppScreenIOS";
 import AppScreenMacOS from "@/components/AppScreenMacOS";
-import {ProjectsDocument, ProjectsDocumentDataSlicesSlice} from "../../prismicio-types";
+import {ProjectsDocumentDataSlicesSlice} from "../../prismicio-types";
+import styles from "./AppScreen.module.css";
 
 interface AppScreenProps {
     slice?: ProjectsDocumentDataSlicesSlice
@@ -14,11 +15,11 @@ const AppScreen = ({slice}: AppScreenProps) => {
     const device = slice?.primary?.device ?? "MacOS"
 
     if (device == "iOS") {
-        return <AppScreenIOS slice={slice} />
+        return <div className={styles.appScreen}><AppScreenIOS slice={slice}/></div>
     }
 
     // Fallback to MacOS as default
-    return <AppScreenMacOS slice={slice} />
+    return <div className={styles.appScreen}><AppScreenMacOS slice={slice}/></div>
 }
 
 export default AppScreen

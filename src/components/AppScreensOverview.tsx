@@ -1,11 +1,23 @@
 import styles from "./AppScreensOverview.module.css";
-import AppScreen from "@/components/AppScreen";
-import {ProjectsDocument} from "../../prismicio-types";
+import {ProjectsDocument, ProjectsDocumentDataSlicesSlice} from "../../prismicio-types";
 import {MouseScrollBehaviourWrapper} from "@/components/MouseScrollBehaviourWrapper";
 import AppIcon from "@/components/AppIcon";
+import AppScreen from "@/components/AppScreen";
 
 interface AppScreensOverviewProps {
     appPreviews: (ProjectsDocument<string> | null)[]
+}
+
+interface AppScreensLayerViewProps {
+    appScreensLayer: (ProjectsDocumentDataSlicesSlice | undefined)[]
+}
+
+function AppScreensLayerView({appScreensLayer}: AppScreensLayerViewProps) {
+    return <div className={styles.appScreensLayer}>
+        {appScreensLayer.map((slice, index) => {
+            return <AppScreen key={slice!.id + index + "-2"} slice={slice}/>
+        })}
+    </div>;
 }
 
 const AppScreensOverview = ({appPreviews}: AppScreensOverviewProps) => {
@@ -24,8 +36,8 @@ const AppScreensOverview = ({appPreviews}: AppScreensOverviewProps) => {
 
     const topLayer = (
         <div className={styles.appIconsLayer}>
-            {[...appIconsLayer, ...appIconsLayer, ...appIconsLayer].map((slice) => {
-                return <AppIcon key={slice!.id} slice={slice} className={styles.iconRotation}/>
+            {[...appIconsLayer, ...appIconsLayer, ...appIconsLayer].map((slice, index) => {
+                return <AppIcon key={slice!.id + index} slice={slice} className={styles.iconRotation}/>
             })}
         </div>
     )
@@ -33,11 +45,7 @@ const AppScreensOverview = ({appPreviews}: AppScreensOverviewProps) => {
 
     return (
         <MouseScrollBehaviourWrapper topLayer={topLayer}>
-            <div className={styles.appScreensLayer}>
-                {[...appScreensLayer, ...appScreensLayer, ...appScreensLayer].map((slice) => {
-                    return <AppScreen key={slice!.id + "-2"} slice={slice}/>
-                })}
-            </div>
+            <AppScreensLayerView appScreensLayer={appScreensLayer}/>
         </MouseScrollBehaviourWrapper>
     )
 }

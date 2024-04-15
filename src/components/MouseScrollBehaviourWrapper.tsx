@@ -1,8 +1,18 @@
 "use client"
 import useMeasure from "react-use-measure";
-import {motion, MotionConfig, MotionValue, SpringOptions, useMotionValue, useSpring, useTransform} from "framer-motion";
+import {
+    LayoutGroup,
+    motion,
+    MotionConfig,
+    MotionValue,
+    SpringOptions,
+    useMotionValue,
+    useSpring,
+    useTransform
+} from "framer-motion";
 import styles from "@/components/AppScreensOverview.module.css";
 import ZStack from "@/components/ZStack";
+import React from "react";
 
 export function useSmoothTransform(value: MotionValue<number>, springOptions: SpringOptions, transformer: (value: number) => number) {
     return useSpring(useTransform(value, transformer), springOptions);
@@ -38,10 +48,10 @@ export const MouseScrollBehaviourWrapper = ({children, topLayer}: MouseScrollBeh
     });
 
     const topLayerLightRotateX = useSmoothTransform(mouseX, spring, (value: number) => {
-        return ((-value - bounds.width / 2) / 1.5) - 400
+        return ((-value - bounds.width / 2))
     });
     const topLayerLightRotateY = useSmoothTransform(mouseY, spring, (value: number) => {
-        return ((-value - bounds.height / 2) / 1.5) - 300
+        return ((-value - bounds.height / 2) / 1.5)
     });
 
     return (
@@ -62,7 +72,9 @@ export const MouseScrollBehaviourWrapper = ({children, topLayer}: MouseScrollBeh
                                 y: childrenLightRotateY,
                             }}
                         >
-                            {children}
+                            <LayoutGroup id="AppOverviewChildren">
+                                {children}
+                            </LayoutGroup>
                         </motion.div>
                         <motion.div
                             className={styles.centerWrapper}

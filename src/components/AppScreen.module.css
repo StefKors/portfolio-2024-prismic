@@ -1,0 +1,3 @@
+.appScreen:nth-child(odd) {
+    transform: translateY(30%);
+}
