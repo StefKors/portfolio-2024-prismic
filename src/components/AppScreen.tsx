@@ -10,6 +10,7 @@ const AppScreen = ({slice}: AppScreenProps) => {
     if (!slice) return
 
     // TODO: Support web
+    // @ts-ignore
     const device = slice?.primary?.device ?? "MacOS"
 
     if (device == "iOS") {

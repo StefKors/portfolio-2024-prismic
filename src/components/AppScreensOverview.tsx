@@ -10,23 +10,32 @@ interface AppScreensOverviewProps {
 
 const AppScreensOverview = ({appPreviews}: AppScreensOverviewProps) => {
 
-    const allSlices = appPreviews.flatMap((preview) => {
+    const appScreensLayer = appPreviews.flatMap(preview => {
         return preview?.data?.slices.filter(slice => {
-            return ["app_window_screenshot", "app_icon"].includes(slice.slice_type)
+            return slice.slice_type == "app_window_screenshot"
         })
     })
 
+    const appIconsLayer = appPreviews.flatMap(preview => {
+        return preview?.data?.slices.filter(slice => {
+            return slice.slice_type == "app_icon"
+        })
+    })
+
+    const topLayer = (
+        <div className={styles.appIconsLayer}>
+            {appIconsLayer.map((slice) => {
+                return <AppIcon key={slice!.id} slice={slice} className={styles.iconRotation}/>
+            })}
+        </div>
+    )
+
+
     return (
-        <MouseScrollBehaviourWrapper>
-            <div className={styles.box}>
-                {allSlices?.reverse().map((slice) => {
-                    if (slice) {
-                        if (slice.slice_type == "app_window_screenshot") {
-                            return <AppScreen key={slice.id + "-2"} slice={slice}/>
-                        } else if (slice.slice_type == "app_icon") {
-                            return <AppIcon key={slice.id} slice={slice}/>
-                        }
-                    }
+        <MouseScrollBehaviourWrapper topLayer={topLayer}>
+            <div className={styles.appScreensLayer}>
+                {appScreensLayer.map((slice) => {
+                    return <AppScreen key={slice!.id + "-2"} slice={slice}/>
                 })}
             </div>
         </MouseScrollBehaviourWrapper>

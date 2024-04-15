@@ -1,3 +1,32 @@
+.appScreensLayer {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    gap: 200px 230px;
+    flex-wrap: wrap;
+}
+
+.appIconsLayer {
+    display: flex;
+    width: 40%;
+    height: 100vh;
+    transform: rotate(-43deg);
+    transform-origin: center;
+    justify-content: center;
+    align-items: center;
+    align-content: space-between;
+    column-gap: 400px;
+    row-gap: 480px;
+    flex-wrap: wrap;
+}
+
+.iconRotation {
+    transform: rotate(43deg);
+    transform-origin: center;
+}
+
 .box {
     display: grid;
     grid-template-rows: 1fr 1fr 1fr;

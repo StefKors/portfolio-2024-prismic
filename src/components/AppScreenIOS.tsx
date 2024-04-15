@@ -1,6 +1,4 @@
 import styles from "./AppScreenIOS.module.css";
-import {imageSizeStr} from "@/utils/imageSizeStr";
-import {imageSize} from "@/utils/ImageSize";
 import ThemeDependentImage from "@/components/ThemeDependentImage";
 import {ProjectsDocumentDataSlicesSlice} from "../../prismicio-types";
 
@@ -8,15 +6,24 @@ interface AppScreenIOSProps {
     slice: ProjectsDocumentDataSlicesSlice
 }
 
+const MAX_IOS_WIDTH = 300
+
 const AppScreenIOS = ({slice}: AppScreenIOSProps) => {
+    // @ts-ignore
     const sliceLight = slice?.primary?.light
+    // @ts-ignore
     const sliceDark = slice?.primary?.dark
 
-    const maxWidthStr = imageSizeStr(sliceLight?.dimensions?.width)
-    const maxHeightStr = imageSizeStr(sliceLight?.dimensions?.height)
+    const ogWidth = sliceLight?.dimensions?.width
+    const finalWidth = Math.min(ogWidth, MAX_IOS_WIDTH)
 
-    const maxWidth = imageSize(sliceLight?.dimensions?.width)
-    const maxHeight = imageSize(sliceLight?.dimensions?.height)
+    const finalHeight = (((100 / ogWidth) * finalWidth) / 100) * sliceLight?.dimensions?.height
+
+    const maxWidthStr = finalWidth + "px"
+    const maxHeightStr = finalHeight + "px"
+
+    const maxWidth = finalWidth
+    const maxHeight = finalHeight
 
     const lightUrl = sliceLight?.url
     const darkUrl = sliceDark?.url
@@ -27,7 +34,7 @@ const AppScreenIOS = ({slice}: AppScreenIOSProps) => {
             style={{maxWidth: maxWidthStr, maxHeight: maxHeightStr}}
         >
             <div className={styles.screenshot}>
-            <ThemeDependentImage lightUrl={lightUrl} darkUrl={darkUrl} width={maxWidth} height={maxHeight} />
+                <ThemeDependentImage lightUrl={lightUrl} darkUrl={darkUrl} width={maxWidth} height={maxHeight}/>
             </div>
             <div className={styles.iphoneFrame}></div>
         </div>

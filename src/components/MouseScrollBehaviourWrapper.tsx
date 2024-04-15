@@ -1,31 +1,48 @@
 "use client"
 import useMeasure from "react-use-measure";
-import {motion, MotionConfig, useMotionValue, useSpring, useTransform} from "framer-motion";
+import {motion, MotionConfig, MotionValue, SpringOptions, useMotionValue, useSpring, useTransform} from "framer-motion";
 import styles from "@/components/AppScreensOverview.module.css";
+import {useState} from "react";
+import ZStack from "@/components/ZStack";
 
-export function useSmoothTransform(value, springOptions, transformer) {
+export function useSmoothTransform(value: MotionValue<number>, springOptions: SpringOptions, transformer: (value: number) => number) {
     return useSpring(useTransform(value, transformer), springOptions);
 }
 
 const transition = {
-    type: "spring",
+    type: "tween",
     duration: 0.7,
     bounce: 0.2
 };
 
-const spring = {stiffness: 600, damping: 30};
+const spring: SpringOptions = {
+    stiffness: 160,
+    damping: 30
+};
 
-export const MouseScrollBehaviourWrapper = ({children}) => {
+interface MouseScrollBehaviourWrapperProps {
+    children: React.ReactNode;
+    topLayer: React.ReactNode;
+}
+
+export const MouseScrollBehaviourWrapper = ({children, topLayer}: MouseScrollBehaviourWrapperProps) => {
     const [ref, bounds] = useMeasure({scroll: false});
 
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
 
-    const lightRotateX = useSmoothTransform(mouseX, spring, (value) => {
+    const childrenLightRotateX = useSmoothTransform(mouseX, spring, (value: number) => {
         return (-value - bounds.width / 2)
     });
-    const lightRotateY = useSmoothTransform(mouseY, spring, (value) => {
+    const childrenLightRotateY = useSmoothTransform(mouseY, spring, (value: number) => {
         return (-value - bounds.height / 2)
+    });
+
+    const topLayerLightRotateX = useSmoothTransform(mouseX, spring, (value: number) => {
+        return (-value - bounds.width / 2) /1.5
+    });
+    const topLayerLightRotateY = useSmoothTransform(mouseY, spring, (value: number) => {
+        return (-value - bounds.height / 2) /1.5
     });
 
     return (
@@ -38,15 +55,26 @@ export const MouseScrollBehaviourWrapper = ({children}) => {
                         mouseY.set(e.clientY - bounds.y - bounds.height / 2);
                     }}
                 >
-                    <motion.div
-                        className={styles.centerWrapper}
-                        style={{
-                            x: lightRotateX,
-                            y: lightRotateY
-                        }}
-                    >
-                        {children}
-                    </motion.div>
+                    <ZStack>
+                        <motion.div
+                            className={styles.centerWrapper}
+                            style={{
+                                x: childrenLightRotateX,
+                                y: childrenLightRotateY
+                            }}
+                        >
+                            {children}
+                        </motion.div>
+                        <motion.div
+                            className={styles.centerWrapper}
+                            style={{
+                                x: topLayerLightRotateX,
+                                y: topLayerLightRotateY
+                            }}
+                        >
+                            {topLayer}
+                        </motion.div>
+                    </ZStack>
                 </motion.div>
             </motion.div>
         </MotionConfig>
