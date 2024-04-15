@@ -23,7 +23,6 @@ const AppScreenMacOS = ({slice}: AppScreenMacOSProps) => {
 
     const maxWidth = appScreenimageSize(finalWidth)
     const maxHeight = appScreenimageSize(finalHeight)
-    console.log(ogHeight, finalHeight, finalWidth, maxWidthStr, maxHeightStr)
 
     const lightUrl = sliceLight?.url
     const darkUrl = sliceDark?.url
