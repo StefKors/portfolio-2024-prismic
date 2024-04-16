@@ -14,23 +14,19 @@ const AppScreenMacOS = ({slice}: AppScreenMacOSProps) => {
     // @ts-ignore
     const sliceDark = slice?.primary?.dark
 
-    const ogHeight = sliceLight?.dimensions?.height
-    const finalHeight = Math.min(ogHeight, MAX_MACOS_HEIGHT)
+    const maxWidthStr = appScreenImageSizeStr(sliceLight?.dimensions?.width)
+    const maxHeightStr = appScreenImageSizeStr(sliceLight?.dimensions?.height)
 
-    const finalWidth = (((100 / ogHeight) * finalHeight) / 100) * sliceLight?.dimensions?.width
-    const maxWidthStr = appScreenImageSizeStr(finalWidth)
-    const maxHeightStr = appScreenImageSizeStr(finalHeight)
-
-    const maxWidth = appScreenimageSize(finalWidth)
-    const maxHeight = appScreenimageSize(finalHeight)
+    const maxWidth = appScreenimageSize(sliceLight?.dimensions?.width)
+    const maxHeight = appScreenimageSize(sliceLight?.dimensions?.height)
 
     const lightUrl = sliceLight?.url
     const darkUrl = sliceDark?.url
 
     return (
-        <div style={{maxWidth: maxWidthStr, maxHeight: maxHeightStr}}>
-            <ThemeDependentImage lightUrl={lightUrl} darkUrl={darkUrl} width={maxWidth} height={maxHeight}/>
-        </div>
+        // <div style={{maxWidth: maxWidthStr, maxHeight: maxHeightStr}}>
+        <ThemeDependentImage lightUrl={lightUrl} darkUrl={darkUrl} width={maxWidth} height={maxHeight}/>
+        // </div>
     )
 }
 

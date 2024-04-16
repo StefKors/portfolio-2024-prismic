@@ -1,1 +1,1 @@
-export const appScreenimageSize = (size: number | undefined | null) => (size ?? 1000) / 4
+export const appScreenimageSize = (size: number | undefined | null) => (size ?? 1000) / 2

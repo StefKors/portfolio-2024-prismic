@@ -1,39 +1,47 @@
 body {
+    color: #FFFFFF;
+    font-family: "SF Compact Text";
+}
 
+p {
+    color: #FFFFFF80;
+    font-weight: 400;
 }
 
 /*img, picture, video, canvas, svg {*/
 img {
-  width: 100%;
+    width: 100%;
 }
 
+/*font-family: -apple-system-ui-serif, ui-serif, 'Georgia', serif;*/
 h1, h2, h3, h4, h5, h6 {
-  font-family: -apple-system-ui-serif, ui-serif, 'Georgia', serif;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+    color: inherit;
+    text-decoration: none;
 }
 
 
 .hidelight {
-  display: unset;
+    display: unset;
 }
+
 .hidedark {
-  display: none;
+    display: none;
 }
 
 
 @media (prefers-color-scheme: dark) {
-  .hidelight {
-    display: none;
-  }
-  .hidedark {
-    display: unset;
-  }
+    .hidelight {
+        display: none;
+    }
 
-  html {
-    color-scheme: dark;
-  }
+    .hidedark {
+        display: unset;
+    }
+
+    html {
+        color-scheme: dark;
+    }
 }
