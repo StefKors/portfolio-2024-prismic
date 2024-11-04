@@ -1,8 +1,8 @@
 .zstack > * {
-    grid-area: 1/1/1/1;
+  grid-area: 1/1/1/1;
 }
 
 .zstack {
-    display: grid;
-    place-items: center center;
+  display: grid;
+  place-items: center center;
 }

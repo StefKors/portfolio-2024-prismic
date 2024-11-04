@@ -1,15 +1,18 @@
-import { Content } from "@prismicio/client";
-import { SliceComponentProps } from "@prismicio/react";
+import { Content } from '@prismicio/client';
+import { SliceComponentProps } from '@prismicio/react';
 
 /**
  * Props for `AppWindowScreenshot`.
  */
-export type AppWindowScreenshotProps = SliceComponentProps<Content.AppWindowScreenshotSlice>;
+export type AppWindowScreenshotProps =
+  SliceComponentProps<Content.AppWindowScreenshotSlice>;
 
 /**
  * Component for "AppWindowScreenshot" Slices.
  */
-const AppWindowScreenshot = ({ slice }: AppWindowScreenshotProps): JSX.Element => {
+const AppWindowScreenshot = ({
+  slice,
+}: AppWindowScreenshotProps): JSX.Element => {
   return (
     <section
       data-slice-type={slice.slice_type}

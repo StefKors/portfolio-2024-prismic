@@ -1,5 +1,7 @@
-import {appScreenimageSize} from "@/utils/AppScreenimageSize";
+import { appScreenimageSize } from '@/utils/AppScreenimageSize';
 
-export const appScreenImageSizeStr = (size: number | undefined | null): string => {
-    return `${appScreenimageSize(size)}px`;
+export const appScreenImageSizeStr = (
+  size: number | undefined | null
+): string => {
+  return `${appScreenimageSize(size)}px`;
 };

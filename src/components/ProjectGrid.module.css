@@ -1,0 +1,99 @@
+.projectGrid {
+  margin: 200px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 1400px;
+  padding: 0 1rem;
+}
+
+.intro {
+
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 2rem 1rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+@media (max-width: 590px) {
+  .list {
+    justify-items: center;
+  }
+}
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 420px;
+  position: relative;
+  cursor: pointer;
+}
+
+.icon {
+  position: absolute;
+  top: 0.2rem;
+  right: 0.2rem;
+  width: 2rem;
+  height: 2rem;
+  background-color: #f7f7f720;
+  border: 1px solid #f7f7f710;
+  border-radius: 0.3rem;
+  opacity: 0;
+  transform: translate(-7px, 7px);
+  transition: 110ms ease-in-out;
+}
+
+.screen:hover .icon {
+  transform: translate(0px, 0px);
+  opacity: 1;
+}
+
+.screen .app > * {
+  transform: translateY(0px);
+  transition: 110ms ease-in-out;
+}
+
+.screen:hover .app > * {
+  transform: translateY(-20px);
+}
+
+.app {
+  background-color: #f7f7f720;
+  border: 1px solid #f7f7f710;
+  border-radius: 0.5rem;
+  height: 184px;
+  overflow: hidden;
+  padding-top: 2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  position: relative;
+}
+
+.info .projectIcon {
+  width: 2rem;
+  height: 2rem;
+}
+
+.info .titleRow {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.info h3 {
+  font-size: 28px;
+  margin: 0;
+}
+
+.info p {
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

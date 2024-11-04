@@ -33,11 +33,7 @@
           "config": {
             "label": "device",
             "placeholder": "MacOS, iOS or Web",
-            "options": [
-              "MacOS",
-              "iOS",
-              "Web"
-            ],
+            "options": ["MacOS", "iOS", "Web"],
             "default_value": "MacOS"
           }
         }

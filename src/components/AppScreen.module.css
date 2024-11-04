@@ -1,3 +1,32 @@
 .appScreen img {
-    max-height: 500px;
+  /*max-height: 500px;*/
+  pointer-events: none;
 }
+
+/*@media (max-width: 1250px) {*/
+/*  .appScreen img {*/
+/*    max-height: 400px;*/
+/*    pointer-events: none;*/
+/*  }*/
+/*}*/
+
+/*@media (max-width: 900px) {*/
+/*  .appScreen img {*/
+/*    max-height: 300px;*/
+/*    pointer-events: none;*/
+/*  }*/
+/*}*/
+
+/*@media (max-width: 600px) {*/
+/*  .appScreen img {*/
+/*    max-height: 200px;*/
+/*    pointer-events: none;*/
+/*  }*/
+/*}*/
+
+/*@media (max-width: 460px) {*/
+/*  .appScreen img {*/
+/*    max-height: 100px;*/
+/*    pointer-events: none;*/
+/*  }*/
+/*}*/

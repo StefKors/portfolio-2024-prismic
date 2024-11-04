@@ -1,49 +1,72 @@
 // @ts-ignore
-import {buildURL} from "imgix-url-builder";
+import { buildURL } from 'imgix-url-builder';
+import { memo } from 'react';
 
-const defaultURL = (url: string | undefined | null, width: number, dpr: number) => {
-    return buildURL(url, {fm: "webp", auto: "none", q: 100, w: width, dpr: dpr})
-}
+import { ZStack } from '@/components/ZStack';
 
-const generateSrcSet = (url: string | undefined | null, width: number) => {
-    return [1, 2, 3].map(number => {
-        return `${defaultURL(url, width, number)} ${number}x`
-    }).join(", \n")
-}
+import styles from './ThemeDependentImage.module.css';
 
-interface ThemeDependentImageProps {
-    alt?: string,
-    width: number,
-    height: number,
-    lightUrl?: string | null,
-    darkUrl?: string | null,
-}
-
-const ThemeDependentImage = async ({alt = "", width, height, lightUrl, darkUrl}: ThemeDependentImageProps) => {
-    const anyUrl = lightUrl ?? darkUrl
-
-    if (!anyUrl) return
-
-    // TODO?
-    // const dataUrl = await dynamicBlurDataUrl(buildURL(darkUrl, {fm: "webp", auto: "none", q: 1, w: 40 }))
-
-    return (
-        <picture>
-            {darkUrl && <source
-                media="(prefers-color-scheme: dark)"
-                srcSet={generateSrcSet(darkUrl, width)}
-                src={defaultURL(darkUrl, width, 2)}
-            />}
-            {lightUrl && <source
-                media="(prefers-color-scheme: light)"
-                srcSet={generateSrcSet(lightUrl, width)}
-                src={defaultURL(lightUrl, width, 2)}
-            />}
-            <img alt={alt}
-                 src={anyUrl}
-            />
-        </picture>
-    )
+const defaultURL = (
+  url: string | undefined | null,
+  width: number,
+  dpr: number = 2
+) => {
+  return buildURL(url, {
+    fm: 'avif',
+    auto: 'none',
+    q: 70,
+    w: width,
+    dpr: dpr,
+  });
 };
 
-export default ThemeDependentImage
+// const generateSrcSet = (url: string | undefined | null, width: number) => {
+//   return [1, 2, 3]
+//     .map((number) => {
+//       return `${defaultURL(url, width, number)} ${number}x`;
+//     })
+//     .join(', \n');
+// };
+
+interface ThemeDependentImageProps {
+  alt?: string;
+  width: number;
+  height: number;
+  lightUrl?: string | null;
+  darkUrl?: string | null;
+}
+
+const InternalThemeDependentImage = ({
+  alt = '',
+  width,
+  lightUrl,
+  darkUrl,
+}: ThemeDependentImageProps) => {
+  const anyUrl = lightUrl ?? darkUrl;
+
+  if (!anyUrl) {
+    return;
+  }
+
+  // TODO?
+  // const dataUrl = await dynamicBlurDataUrl(buildURL(darkUrl, {fm: "webp", auto: "none", q: 1, w: 40 }))
+
+  return (
+    <ZStack>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        className={styles.onlyOnLight}
+        alt={alt}
+        src={defaultURL(lightUrl ?? anyUrl, width)}
+      />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        className={styles.onlyOnDark}
+        alt={alt}
+        src={defaultURL(darkUrl ?? anyUrl, width)}
+      />
+    </ZStack>
+  );
+};
+
+export const ThemeDependentImage = memo(InternalThemeDependentImage);

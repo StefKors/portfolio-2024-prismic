@@ -1,33 +1,37 @@
-import {appScreenImageSizeStr} from "@/utils/AppScreenImageSizeStr";
-import ThemeDependentImage from "@/components/ThemeDependentImage";
-import {appScreenimageSize} from "@/utils/AppScreenimageSize";
-import {ProjectsDocumentDataSlicesSlice} from "../../prismicio-types";
+import { ThemeDependentImage } from '@/components/ThemeDependentImage';
+import { appScreenimageSize } from '@/utils/AppScreenimageSize';
+
+import { ProjectsDocumentDataSlicesSlice } from '../../prismicio-types';
 
 interface AppScreenMacOSProps {
-    slice: ProjectsDocumentDataSlicesSlice
+  slice: ProjectsDocumentDataSlicesSlice;
 }
 
-const MAX_MACOS_HEIGHT = 2800
-const AppScreenMacOS = ({slice}: AppScreenMacOSProps) => {
-    // @ts-ignore
-    const sliceLight = slice?.primary?.light
-    // @ts-ignore
-    const sliceDark = slice?.primary?.dark
+// const MAX_MACOS_HEIGHT = 2800;
 
-    const maxWidthStr = appScreenImageSizeStr(sliceLight?.dimensions?.width)
-    const maxHeightStr = appScreenImageSizeStr(sliceLight?.dimensions?.height)
+export const AppScreenMacOS = ({ slice }: AppScreenMacOSProps) => {
+  // @ts-ignore
+  const sliceLight = slice?.primary?.light;
+  // @ts-ignore
+  const sliceDark = slice?.primary?.dark;
 
-    const maxWidth = appScreenimageSize(sliceLight?.dimensions?.width)
-    const maxHeight = appScreenimageSize(sliceLight?.dimensions?.height)
+  // const maxWidthStr = appScreenImageSizeStr(sliceLight?.dimensions?.width);
+  // const maxHeightStr = appScreenImageSizeStr(sliceLight?.dimensions?.height);
 
-    const lightUrl = sliceLight?.url
-    const darkUrl = sliceDark?.url
+  const maxWidth = appScreenimageSize(sliceLight?.dimensions?.width);
+  const maxHeight = appScreenimageSize(sliceLight?.dimensions?.height);
 
-    return (
-        // <div style={{maxWidth: maxWidthStr, maxHeight: maxHeightStr}}>
-        <ThemeDependentImage lightUrl={lightUrl} darkUrl={darkUrl} width={maxWidth} height={maxHeight}/>
-        // </div>
-    )
-}
+  const lightUrl = sliceLight?.url;
+  const darkUrl = sliceDark?.url;
 
-export default AppScreenMacOS
+  // <div style={{maxWidth: maxWidthStr, maxHeight: maxHeightStr}}>
+  // </div>
+  return (
+    <ThemeDependentImage
+      lightUrl={lightUrl}
+      darkUrl={darkUrl}
+      width={maxWidth}
+      height={maxHeight}
+    />
+  );
+};

@@ -1,0 +1,13 @@
+.onlyOnDark {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .onlyOnDark {
+    display: block;
+  }
+
+  .onlyOnLight {
+    display: none;
+  }
+}

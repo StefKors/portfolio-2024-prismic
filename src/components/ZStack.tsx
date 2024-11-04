@@ -1,11 +1,17 @@
-import styles from "./ZStack.module.css"
+import { forwardRef, HTMLAttributes, ReactNode } from 'react';
 
-interface ZStackProps {
-    children: React.ReactNode
+import styles from './ZStack.module.css';
+
+interface ZStackProps extends HTMLAttributes<HTMLDivElement> {
+  children: ReactNode;
 }
 
-const ZStack = ({children}: ZStackProps) => (
-    <div className={styles.zstack}>{children}</div>
-)
+export const ZStack = forwardRef<HTMLDivElement, ZStackProps>(
+  ({ children, ...props }, ref) => (
+    <div ref={ref} className={styles.zstack} {...props}>
+      {children}
+    </div>
+  )
+);
 
-export default ZStack
+ZStack.displayName = 'ZStack';

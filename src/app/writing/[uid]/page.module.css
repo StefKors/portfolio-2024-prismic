@@ -1,0 +1,82 @@
+.screen {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 800px;
+  position: relative;
+  margin: 200px auto;
+}
+
+.platform {
+  height: 1.5rem;
+}
+
+.icon {
+  position: absolute;
+  top: 0.2rem;
+  right: 0.2rem;
+  width: 2rem;
+  height: 2rem;
+  background-color: #f7f7f720;
+  border: 1px solid #f7f7f710;
+  border-radius: 0.3rem;
+  opacity: 0;
+  transform: translate(-7px, 7px);
+  transition: 110ms ease-in-out;
+}
+
+.screen:hover .icon {
+  transform: translate(0px, 0px);
+  opacity: 1;
+}
+
+.screen .app > * {
+  transform: translateY(0px);
+  transition: 110ms ease-in-out;
+}
+
+.screen:hover .app > * {
+  transform: translateY(-20px);
+}
+
+.app {
+  background-color: #f7f7f720;
+  border: 1px solid #f7f7f710;
+  border-radius: 0.5rem;
+  height: 184px;
+  overflow: hidden;
+  padding-top: 2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  position: relative;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.info .projectIcon {
+  width: 3.8rem;
+  height: 3.8rem;
+}
+
+.info .titleRow {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+}
+
+.info h3 {
+  font-size: 48px;
+  margin: 0;
+}
+
+.info p {
+  margin: 1em 0;
+}

@@ -1,10 +1,11 @@
-import { Content } from "@prismicio/client";
-import { SliceComponentProps } from "@prismicio/react";
+import { Content } from '@prismicio/client';
+import { SliceComponentProps } from '@prismicio/react';
 
 /**
  * Props for `FeatureBlocks`.
  */
-export type FeatureBlocksProps = SliceComponentProps<Content.FeatureBlocksSlice>;
+export type FeatureBlocksProps =
+  SliceComponentProps<Content.FeatureBlocksSlice>;
 
 /**
  * Component for "FeatureBlocks" Slices.
