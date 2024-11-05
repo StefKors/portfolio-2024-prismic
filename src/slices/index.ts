@@ -7,7 +7,6 @@ export const components = {
   app_window_screenshot: dynamic(() => import('./AppWindowScreenshot')),
   embed: dynamic(() => import('./GistEmbed')),
   feature_blocks: dynamic(() => import('./FeatureBlocks')),
-  markdown_text: dynamic(() => import('./MarkdownText')),
   project_image: dynamic(() => import('./ProjectImage')),
   text_block: dynamic(() => import('./TextBlock')),
 };

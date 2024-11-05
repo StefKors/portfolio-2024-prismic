@@ -31,9 +31,6 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
-            "markdown_text": {
-              "type": "SharedSlice"
-            },
             "text_block": {
               "type": "SharedSlice"
             },

@@ -3,7 +3,7 @@ import { NextRequest } from 'next/server';
 import {
   generatePlatformVector,
   PlatformSupport,
-} from '@/utils/generatePlatformVector';
+} from '@/app/utils/generatePlatformVector';
 
 /// `/api/platform?os=macos,ios,ipados,tvos,watchos,visionos`
 /// return platform image based on query params included in the `os` search param

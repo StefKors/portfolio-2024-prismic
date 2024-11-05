@@ -113,10 +113,7 @@ export type ApplicationDocument<Lang extends string = string> =
     Lang
   >;
 
-type BlogpostDocumentDataSlicesSlice =
-  | MarkdownTextSlice
-  | TextBlockSlice
-  | EmbedSlice;
+type BlogpostDocumentDataSlicesSlice = TextBlockSlice | EmbedSlice;
 
 /**
  * Content for BlogPost documents
@@ -1051,51 +1048,6 @@ export type FeatureBlocksSlice = prismic.SharedSlice<
 >;
 
 /**
- * Primary content in *MarkdownText → Default → Primary*
- */
-export interface MarkdownTextSliceDefaultPrimary {
-  /**
-   * content field in *MarkdownText → Default → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: markdown_text.default.primary.content
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  content: prismic.RichTextField;
-}
-
-/**
- * Default variation for MarkdownText Slice
- *
- * - **API ID**: `default`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type MarkdownTextSliceDefault = prismic.SharedSliceVariation<
-  'default',
-  Simplify<MarkdownTextSliceDefaultPrimary>,
-  never
->;
-
-/**
- * Slice variation for *MarkdownText*
- */
-type MarkdownTextSliceVariation = MarkdownTextSliceDefault;
-
-/**
- * MarkdownText Shared Slice
- *
- * - **API ID**: `markdown_text`
- * - **Description**: MarkdownText
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type MarkdownTextSlice = prismic.SharedSlice<
-  'markdown_text',
-  MarkdownTextSliceVariation
->;
-
-/**
  * Primary content in *ProjectImage → Items*
  */
 export interface ProjectImageSliceDefaultItem {
@@ -1244,10 +1196,6 @@ declare module '@prismicio/client' {
       FeatureBlocksSliceDefaultItem,
       FeatureBlocksSliceVariation,
       FeatureBlocksSliceDefault,
-      MarkdownTextSlice,
-      MarkdownTextSliceDefaultPrimary,
-      MarkdownTextSliceVariation,
-      MarkdownTextSliceDefault,
       ProjectImageSlice,
       ProjectImageSliceDefaultItem,
       ProjectImageSliceVariation,

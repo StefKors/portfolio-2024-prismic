@@ -5,7 +5,7 @@ import { NextRequest } from 'next/server';
 import {
   generatePlatformVector,
   PlatformSupport,
-} from '@/utils/generatePlatformVector';
+} from '@/app/utils/generatePlatformVector';
 
 export const dynamic = 'force-static';
 

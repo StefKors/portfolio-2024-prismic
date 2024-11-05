@@ -1,5 +1,5 @@
+import { appScreenimageSize } from '@/app/utils/AppScreenimageSize';
 import { ThemeDependentImage } from '@/components/ThemeDependentImage';
-import { appScreenimageSize } from '@/utils/AppScreenimageSize';
 
 import { ProjectsDocumentDataSlicesSlice } from '../../prismicio-types';
 

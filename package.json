@@ -32,6 +32,8 @@
     "react-dom": "19.0.0-rc-02c0e824-20241028",
     "react-fast-compare": "^3.2.2",
     "react-use-measure": "^2.1.1",
+    "rehype-infer-description-meta": "^2.0.0",
+    "rehype-infer-title-meta": "^2.0.0",
     "rehype-sanitize": "^6.0.0",
     "rehype-stringify": "^10.0.1",
     "remark-parse": "^11.0.0",

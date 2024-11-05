@@ -2,8 +2,8 @@
 import { motion } from 'framer-motion';
 import { RefObject, useState } from 'react';
 
+import { APP_SCREEN_ROTATION, getRotation } from '@/app/utils/GetRotation';
 import { AppScreen } from '@/components/AppScreen';
-import { APP_SCREEN_ROTATION, getRotation } from '@/utils/GetRotation';
 
 import { ProjectsDocumentDataSlicesSlice } from '../../prismicio-types';
 import styles from './AppScreenWrapper.module.css';

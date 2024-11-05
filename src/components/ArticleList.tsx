@@ -1,20 +1,20 @@
-import { PrismicNextLink } from '@prismicio/next';
-
-import { createClient } from '@/prismicio';
+import { getAllArticles } from '@/app/utils/getAllArticles';
 
 export const ArticleList = async () => {
-  const client = createClient();
-  const articles = await client.getAllByType('blogpost');
-
+  const articles = await getAllArticles();
+  // console.log(articles);
   return (
     <div>
       <h1>Writing</h1>
       <ol>
         {articles.map((post) => (
-          <li key={post.id}>
-            <PrismicNextLink href={post.url ?? ''}>
-              {post.data.title}
-            </PrismicNextLink>
+          <li key={post.uid}>
+            <b>{post.title}</b>
+            <div>{post.description}</div>
+            {/*<PrismicNextLink href={'/writing/' + post.uid}>*/}
+            {/*<div></div>*/}
+            {/*<div></div>*/}
+            {/*</PrismicNextLink>*/}
           </li>
         ))}
       </ol>

@@ -5,7 +5,7 @@
   --color-muted: #33333390;
   --border: #33333360;
   --background: #ffffff;
-
+  --accent: #2b4a2c;
   font-size: 16px;
   line-height: 1.75;
 }
@@ -15,7 +15,9 @@
     --color: #ffffff;
     --color-muted: #ffffff90;
     --border: #ffffff60;
-    --background: #333333;
+    /*--background: #333333;*/
+    --accent: #2b4a2c;
+    --background: #111110;
   }
 }
 

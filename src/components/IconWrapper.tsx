@@ -2,9 +2,9 @@
 import { motion } from 'framer-motion';
 import { RefObject, useState } from 'react';
 
+import { getRotation, ICON_ROTATION } from '@/app/utils/GetRotation';
 import { AppIcon } from '@/components/AppIcon';
 import styles from '@/components/AppScreensOverview.module.css';
-import { getRotation, ICON_ROTATION } from '@/utils/GetRotation';
 
 import { ProjectsDocumentDataSlicesSlice } from '../../prismicio-types';
 

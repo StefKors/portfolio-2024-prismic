@@ -1,20 +1,13 @@
-import { SliceZone } from '@prismicio/react';
-import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
+import path from 'node:path';
 
+import { SliceZone } from '@prismicio/react';
+import { promises as fs } from 'fs';
+import { notFound } from 'next/navigation';
+import { ReactNode } from 'react';
+
+import { getAllArticles } from '@/app/utils/getAllArticles';
+import { bufferToMarkdown } from '@/app/utils/markdown';
 import { ArticleList } from '@/components/ArticleList';
-// import rehypeSanitize from 'rehype-sanitize';
-// Return a list of `params` to populate the [slug] dynamic segment
-// export async function generateStaticParams() {
-//   // const posts = await fetch('https://.../posts').then((res) => res.json())
-//   const client = createClient();
-//   const showcases = await client.getAllByType('showcase');
-//
-//   return showcases.map((showcase) => ({
-//     uid: showcase.uid,
-//   }));
-// }
-import { CodeBlock } from '@/components/CodeBlock';
 import { createClient } from '@/prismicio';
 import { components } from '@/slices';
 
@@ -22,36 +15,19 @@ import styles from './page.module.css';
 
 type Params = { uid: string };
 
+export const dynamic = 'force-static';
+
 export default async function Page({ params }: { params: Promise<Params> }) {
   const { uid } = await params;
-  const client = createClient();
-  const blogpost = await client
-    .getByUID('blogpost', uid)
-    .catch(() => notFound());
+  const blogpost = await fetchUniversalArticle(uid).catch(() => notFound());
 
-  // return <SliceZone slices={page.data.slices} components={components} />;
-  // const client = createClient();
-  // const blogpost = await client.getByUID('blogpost', uid);
-  //
-  // // const blogpost = await client.getByID('ZykCOhEAAC4AKH82');
-  //
-  // // const html = codeToHtml('console.log()', {
-  // //   lang: 'ts',
-  // //   theme: 'vitesse-dark',
-  // //   transformers: [transformerTwoslash()],
-  // // });
-  // console.log(String(file));
   return (
     <main>
       <div className={styles.screen}>
         <div className={styles.info}>
-          <h1>{blogpost.data.title}</h1>
+          <h1>{blogpost.uid}</h1>
 
-          <article>
-            <CodeBlock content={'console.log("Hello World")'} lang={'ts'} />
-          </article>
-
-          <SliceZone slices={blogpost.data.slices} components={components} />
+          <article>{blogpost.content}</article>
 
           <hr />
 
@@ -62,26 +38,61 @@ export default async function Page({ params }: { params: Promise<Params> }) {
   );
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<Params>;
-}): Promise<Metadata> {
-  const { uid } = await params;
-  const client = createClient();
-  const page = await client.getByUID('blogpost', uid).catch(() => notFound());
-
-  return {
-    title: page.data.meta_title,
-    description: page.data.meta_description,
-  };
-}
+// export async function generateMetadata({
+//   params,
+// }: {
+//   params: Promise<Params>;
+// }): Promise<Metadata> {
+//   const { uid } = await params;
+//   const client = createClient();
+//   const page = await client.getByUID('blogpost', uid);
+//   // .catch(() => notFound());
+//
+//   return {
+//     title: page.data.meta_title,
+//     description: page.data.meta_description,
+//   };
+// }
 
 export async function generateStaticParams() {
-  const client = createClient();
-  const pages = await client.getAllByType('blogpost');
-
-  return pages.map((page) => {
-    return { uid: page.uid };
+  const articles = await getAllArticles();
+  return articles.map(({ uid }) => {
+    return { uid };
   });
 }
+
+interface UniversalArticle {
+  uid: string;
+  content: ReactNode;
+}
+
+const fetchUniversalArticle = async (
+  uid: string
+): Promise<UniversalArticle> => {
+  try {
+    const client = createClient();
+    const blogpost = await client.getByUID('blogpost', uid);
+    return {
+      uid,
+      content: (
+        <SliceZone slices={blogpost.data.slices} components={components} />
+      ),
+    };
+  } catch (prismicError) {
+    try {
+      const fileUrl = path.join(process.cwd(), `src/content/${uid}.md`);
+      const markdown = await bufferToMarkdown(await fs.readFile(fileUrl));
+
+      return {
+        uid,
+        content: (
+          <div dangerouslySetInnerHTML={{ __html: String(markdown) }}></div>
+        ),
+      };
+    } catch (markdownError) {
+      console.error(markdownError);
+      console.error(prismicError);
+      throw Error('Failed to fetch markdown content');
+    }
+  }
+};

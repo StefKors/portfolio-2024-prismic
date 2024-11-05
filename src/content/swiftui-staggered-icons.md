@@ -1,6 +1,6 @@
-# Mastering Staggered Transparent Icons with SwiftUI (Markdown)
+# Swiftui 101
 
-Are you looking to create a visually stunning and interactive user interface for your app? Look no further than the power of SwiftUI masks and staggered icons! In this article, we'll dive into the code and uncover the secrets behind crafting a captivating staggered icons interface using transparent icons.
+no further than the power of SwiftUI masks and staggered icons! In this article, we'll dive into the code and uncover the secrets behind crafting a captivating staggered icons interface using transparent icons.
 
 ## The Inspiration
 
