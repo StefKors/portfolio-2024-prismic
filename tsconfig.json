@@ -29,9 +29,6 @@
       "@/*": [
         "./src/*"
       ]
-//      "prismicio-types": [
-//        "./"
-//      ]
     },
     "target": "ESNext"
   },

@@ -1,10 +1,10 @@
 import { Content } from '@prismicio/client';
 import { SliceComponentProps } from '@prismicio/react';
-import { unified } from 'unified';
-import remarkParse from 'remark-parse';
-import remarkRehype from 'remark-rehype';
 import rehypeShiki from '@shikijs/rehype';
 import rehypeStringify from 'rehype-stringify';
+import remarkParse from 'remark-parse';
+import remarkRehype from 'remark-rehype';
+import { unified } from 'unified';
 
 const content = `
 # Mastering Staggered Transparent Icons with SwiftUI

@@ -4,8 +4,10 @@ import {
   PrismicRichText,
   SliceComponentProps,
 } from '@prismicio/react';
-import styles from './index.module.css';
+
 import { CodeBlock } from '@/components/CodeBlock';
+
+import styles from './index.module.css';
 
 /**
  * Props for `TextBlock`.

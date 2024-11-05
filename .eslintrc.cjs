@@ -8,7 +8,7 @@ module.exports = {
     'plugin:react/jsx-runtime',
     // 'plugin:react-hooks/recommended',
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs', 'src/slices'],
+  ignorePatterns: ['dist', '.eslintrc.cjs'],
   plugins: ['react-refresh', 'simple-import-sort', 'react', 'import'],
   settings: {
     react: {
