@@ -3,11 +3,14 @@ import { Fragment } from 'react';
 import { jsx, jsxs } from 'react/jsx-runtime';
 import { codeToHast } from 'shiki';
 
-import styles from './CodeBlock.module.css';
+interface CodeBlockProps {
+  content: string;
+  lang: string;
+}
 
-export const CodeBlock = async ({ content }: { content: string }) => {
+export const CodeBlock = async ({ content, lang }: CodeBlockProps) => {
   const out = await codeToHast(content, {
-    lang: 'ts',
+    lang: lang,
     theme: 'plastic',
   });
 
@@ -15,13 +18,13 @@ export const CodeBlock = async ({ content }: { content: string }) => {
     Fragment,
     jsx,
     jsxs,
-    components: {
-      // your custom `pre` element
-      pre: (props) => (
-        <div className={styles.codeblock}>
-          <pre data-custom-codeblock {...props} />
-        </div>
-      ),
-    },
+    // components: {
+    //   // your custom `pre` element
+    //   pre: (props) => (
+    //     <div className={styles.codeblock}>
+    //       <pre {...props} />
+    //     </div>
+    //   ),
+    // },
   });
 };

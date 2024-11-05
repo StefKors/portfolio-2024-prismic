@@ -1,29 +1,24 @@
+import { createClient } from '@prismicio/client';
+import { notFound } from 'next/navigation';
 import { NextRequest } from 'next/server';
 
-import { createClient } from '@/prismicio';
 import {
   generatePlatformVector,
   PlatformSupport,
 } from '@/utils/generatePlatformVector';
 
-// Return a list of `params` to populate the [slug] dynamic segment
-export async function generateStaticParams() {
-  // const posts = await fetch('https://.../posts').then((res) => res.json())
-  const client = createClient();
-  const showcases = await client.getAllByType('showcase');
-
-  return showcases.map((showcase) => ({
-    uid: showcase.uid,
-  }));
-}
+export const dynamic = 'force-static';
 
 // https://nextjs.org/docs/app/api-reference/functions/image-response
 export async function GET(
   _request: NextRequest,
-  { params }: { params: { uid: string } }
+  { params }: { params: Promise<{ uid: string }> }
 ) {
-  const client = createClient();
-  const showcase = await client.getByUID('showcase', params.uid);
+  const { uid } = await params;
+  const client = createClient('portfolio-stefkors');
+  const page = await client.getByUID('showcase', uid).catch(() => {
+    return notFound();
+  });
 
   const support: PlatformSupport = {
     macos: false,
@@ -32,10 +27,21 @@ export async function GET(
     tvos: false,
     watchos: false,
     visionos: false,
-    ...showcase?.data?.platform_support?.[0],
+    ...page?.data?.platform_support?.[0],
   };
+
+  console.log(support);
 
   return new Response(generatePlatformVector(support), {
     headers: { 'content-type': 'image/svg+xml' },
+  });
+}
+
+export async function generateStaticParams() {
+  const client = createClient('portfolio-stefkors');
+  const pages = await client.getAllByType('showcase');
+
+  return pages.map((page) => {
+    return { uid: page.uid };
   });
 }

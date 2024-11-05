@@ -1,7 +1,10 @@
 import { Content } from '@prismicio/client';
-import { PrismicRichText, SliceComponentProps } from '@prismicio/react';
+import {
+  JSXMapSerializer,
+  PrismicRichText,
+  SliceComponentProps,
+} from '@prismicio/react';
 import styles from './index.module.css';
-import { JSXMapSerializer } from '@prismicio/react/src/types';
 import { CodeBlock } from '@/components/CodeBlock';
 
 /**
@@ -15,9 +18,11 @@ export type TextBlockProps = SliceComponentProps<Content.TextBlockSlice>;
 
 const textComponents: JSXMapSerializer = {
   // TODO: this is broken but getting there....
-  preformatted: ({ children }) => <CodeBlock content={} />,
+  preformatted: ({ text }) => (
+    <CodeBlock content={text ?? 'test'} lang={'swift'} />
+  ),
 };
-const TextBlock = ({ slice }: TextBlockProps): JSX.Element => {
+const TextBlock = ({ slice }: TextBlockProps) => {
   return (
     <section
       className={styles.content}

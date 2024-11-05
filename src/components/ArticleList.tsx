@@ -1,13 +1,16 @@
 import { PrismicNextLink } from '@prismicio/next';
 
-import { BlogpostDocument } from '../../prismicio-types';
+import { createClient } from '@/prismicio';
 
-export function ArticleList({ posts }: { posts: BlogpostDocument<string>[] }) {
+export const ArticleList = async () => {
+  const client = createClient();
+  const articles = await client.getAllByType('blogpost');
+
   return (
     <div>
       <h1>Writing</h1>
       <ol>
-        {posts.map((post) => (
+        {articles.map((post) => (
           <li key={post.id}>
             <PrismicNextLink href={post.url ?? ''}>
               {post.data.title}
@@ -17,4 +20,4 @@ export function ArticleList({ posts }: { posts: BlogpostDocument<string>[] }) {
       </ol>
     </div>
   );
-}
+};

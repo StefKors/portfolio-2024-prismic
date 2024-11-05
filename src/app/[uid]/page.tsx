@@ -1,5 +1,7 @@
 import { PrismicImage, SliceZone } from '@prismicio/react';
+import { notFound } from 'next/navigation';
 import { NextResponse } from 'next/server';
+import { ProjectsDocumentData } from 'prismicio-types';
 
 import { ScreenshotView } from '@/components/ScreenshotView';
 import { createClient } from '@/prismicio';
@@ -18,7 +20,10 @@ import styles from './page.module.css';
 //   }));
 // }
 
-export default async function Page({ params }: { params: { uid: string } }) {
+export default async function Page(props: {
+  params: Promise<{ uid: string }>;
+}) {
+  const params = await props.params;
   const uid = params.uid;
 
   if (uid === undefined) {
@@ -26,19 +31,26 @@ export default async function Page({ params }: { params: { uid: string } }) {
   }
 
   const client = createClient();
-  const showcase = await client.getByUID('showcase', uid, {
-    fetchLinks: 'projects.slices',
-  });
+  const showcase = await client
+    .getByUID('showcase', uid, {
+      fetchLinks: 'projects.slices',
+    })
+    .catch(() => notFound());
 
-  const linkedProject = showcase?.data?.project_link;
+  const project: ProjectsDocumentData = showcase.data.project_link;
 
+  // const project = await client.getByUID('projects', showcase.data.project_link, {
+  //   fetchLinks: 'projects.slices',
+  // });
+
+  // const linkedProject: Pick<ProjectsDocumentData, 'slices'> =
+  //   showcase?.data?.project_link;
+  // const slices = linkedProject?.data?.slices ?? [];
   return (
     <main>
       <div className={styles.screen}>
         <div className={styles.info}>
-          {linkedProject ? (
-            <ScreenshotView slices={linkedProject?.data?.slices ?? []} />
-          ) : null}
+          {project ? <ScreenshotView slices={project.data.slices} /> : null}
 
           <div className={styles.titleRow}>
             <PrismicImage

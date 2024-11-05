@@ -1,13 +1,4 @@
-import { Content } from '@prismicio/client';
-import { SliceComponentProps } from '@prismicio/react';
-import { unified } from 'unified';
-import remarkParse from 'remark-parse';
-import remarkRehype from 'remark-rehype';
-import rehypeShiki from '@shikijs/rehype';
-import rehypeStringify from 'rehype-stringify';
-
-const content = `
-# Mastering Staggered Transparent Icons with SwiftUI
+# Mastering Staggered Transparent Icons with SwiftUI (Markdown)
 
 Are you looking to create a visually stunning and interactive user interface for your app? Look no further than the power of SwiftUI masks and staggered icons! In this article, we'll dive into the code and uncover the secrets behind crafting a captivating staggered icons interface using transparent icons.
 
@@ -25,17 +16,17 @@ The key to creating this staggered icons interface lies in the power of SwiftUI 
 
 Here's how we'll use masks to create our staggered icons:
 
-1. **Circle Mask**: We'll start with a \`Circle()\` shape and use the \`subtracting\` modifier to remove a portion of the circle, creating a unique shape.
+1. **Circle Mask**: We'll start with a `Circle()` shape and use the `subtracting` modifier to remove a portion of the circle, creating a unique shape.
 2. **Offset Adjustment**: By adjusting the offset of the subtracted circle, we can control the staggered positioning of the icons.
-3. **Transition Animation**: To enhance the interactivity, we'll use the \`animation()\` modifier to introduce smooth transitions when the user hovers over the icons.
+3. **Transition Animation**: To enhance the interactivity, we'll use the `animation()` modifier to introduce smooth transitions when the user hovers over the icons.
 
 ## Implementing the Staggered Icons
 
 Let's dive into the code and see how we can bring this concept to life:
 
-\`\`\`swift
+```swift
 // ...
-ForEach(Array(stages.enumerated()), id: \\.element, content: { index, stage in
+ForEach(Array(stages.enumerated()), id: \.element, content: { index, stage in
     HStack(spacing: 0) {
         GitLabCIJobsView(stage: stage, instance: instance)
             .id(stage.id)
@@ -61,13 +52,13 @@ ForEach(Array(stages.enumerated()), id: \\.element, content: { index, stage in
     .zIndex(Double(stages.count - index))
 })
 // ...
-\`\`\`
+```
 
-In this code snippet, we're using a \`ForEach\` loop to iterate through the \`stages\` array. For each stage, we create an \`HStack\` that contains the \`GitLabCIJobsView\` (which represents our icon) and a connecting \`Rectangle\` element.
+In this code snippet, we're using a `ForEach` loop to iterate through the `stages` array. For each stage, we create an `HStack` that contains the `GitLabCIJobsView` (which represents our icon) and a connecting `Rectangle` element.
 
-The magic happens in the \`.mask\` modifier applied to the \`GitLabCIJobsView\`. We create a \`Circle()\` shape and use the \`subtracting\` modifier to remove a portion of the circle. The amount of offset applied to the subtracted circle is determined by the \`index\` of the current stage, creating the staggered effect.
+The magic happens in the `.mask` modifier applied to the `GitLabCIJobsView`. We create a `Circle()` shape and use the `subtracting` modifier to remove a portion of the circle. The amount of offset applied to the subtracted circle is determined by the `index` of the current stage, creating the staggered effect.
 
-To enhance the interactivity, we've added a hover effect that triggers a smooth animation on the connecting \`Rectangle\` element. When the user hovers over the icons, the \`Rectangle\` fades in and out, creating a dynamic and engaging user experience.
+To enhance the interactivity, we've added a hover effect that triggers a smooth animation on the connecting `Rectangle` element. When the user hovers over the icons, the `Rectangle` fades in and out, creating a dynamic and engaging user experience.
 
 ## Conclusion
 
@@ -77,40 +68,3 @@ Remember, the key to mastering this approach is understanding the fundamentals o
 
 Happy coding!
 
-
-`;
-
-/**
- * Props for `MarkdownText`.
- */
-export type MarkdownTextProps = SliceComponentProps<Content.MarkdownTextSlice>;
-
-/**
- * Component for "MarkdownText" Slices.
- */
-const MarkdownText = async ({ slice }: MarkdownTextProps) => {
-  const file = await unified()
-    .use(remarkParse) // Convert into markdown AST
-    .use(remarkRehype) // Transform to HTML AST
-    .use(rehypeShiki, {
-      theme: 'plastic',
-      // or `theme` for a single theme
-      // themes: {
-      //   light: 'vitesse-light',
-      //   dark: 'vitesse-dark',
-      // },
-    })
-    .use(rehypeStringify) // Convert AST into serialized HTML
-    .process(content);
-
-  return (
-    <section
-      data-slice-type={slice.slice_type}
-      data-slice-variation={slice.variation}
-    >
-      <div dangerouslySetInnerHTML={{ __html: String(file) }}></div>
-    </section>
-  );
-};
-
-export default MarkdownText;

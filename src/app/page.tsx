@@ -7,11 +7,6 @@ import styles from './page.module.css';
 
 export default async function Home() {
   const client = createClient();
-
-  // const page = await client.getByType('homepage');
-  // const everything = await client.dangerouslyGetAll();
-  const articles = await client.getAllByType('blogpost');
-  console.log(articles);
   const projects = await client.getAllByType('projects');
   const appPreviews = projects
     ?.map((project) => {
@@ -32,7 +27,7 @@ export default async function Home() {
         {appPreviews && <AppScreensOverview appPreviews={appPreviews} />}
         <div className={styles.inset}></div>
       </div>
-      {articles && <ArticleList posts={articles} />}
+      <ArticleList />
       {appPreviews && <ProjectGrid appPreviews={appPreviews} />}
     </main>
   );

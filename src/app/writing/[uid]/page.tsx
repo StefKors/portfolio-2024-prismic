@@ -2,6 +2,7 @@ import { SliceZone } from '@prismicio/react';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
+import { ArticleList } from '@/components/ArticleList';
 // import rehypeSanitize from 'rehype-sanitize';
 // Return a list of `params` to populate the [slug] dynamic segment
 // export async function generateStaticParams() {
@@ -47,10 +48,14 @@ export default async function Page({ params }: { params: Promise<Params> }) {
           <h1>{blogpost.data.title}</h1>
 
           <article>
-            <CodeBlock content={'console.log("Hello World")'} />
+            <CodeBlock content={'console.log("Hello World")'} lang={'ts'} />
           </article>
 
           <SliceZone slices={blogpost.data.slices} components={components} />
+
+          <hr />
+
+          <ArticleList />
         </div>
       </div>
     </main>
