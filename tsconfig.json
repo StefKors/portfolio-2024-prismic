@@ -24,13 +24,14 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
       "@/*": [
         "./src/*"
-      ],
-      "prismicio-types": [
-        "./"
       ]
+//      "prismicio-types": [
+//        "./"
+//      ]
     },
     "target": "ESNext"
   },

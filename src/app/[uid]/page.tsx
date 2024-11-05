@@ -37,7 +37,9 @@ export default async function Page(props: {
     })
     .catch(() => notFound());
 
-  const project: ProjectsDocumentData = showcase.data.project_link;
+  const project = showcase.data.project_link as unknown as {
+    data: Pick<ProjectsDocumentData, 'slices'>;
+  };
 
   // const project = await client.getByUID('projects', showcase.data.project_link, {
   //   fetchLinks: 'projects.slices',

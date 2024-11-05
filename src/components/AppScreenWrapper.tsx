@@ -29,7 +29,6 @@ export const AppScreenWrapper = ({
       dragMomentum={false}
       dragConstraints={containerRef}
       dragSnapToOrigin={true}
-      className={styles.container}
       whileDrag={{
         scale: 1.04,
       }}
@@ -39,7 +38,9 @@ export const AppScreenWrapper = ({
         y: getRotation(index, APP_SCREEN_ROTATION) * 17,
       }}
     >
-      <AppScreen slice={slice} />
+      <div className={styles.container}>
+        <AppScreen slice={slice} />
+      </div>
     </motion.div>
   );
 };

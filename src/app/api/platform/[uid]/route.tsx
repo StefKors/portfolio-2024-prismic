@@ -30,8 +30,6 @@ export async function GET(
     ...page?.data?.platform_support?.[0],
   };
 
-  console.log(support);
-
   return new Response(generatePlatformVector(support), {
     headers: { 'content-type': 'image/svg+xml' },
   });
