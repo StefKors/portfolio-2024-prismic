@@ -38,6 +38,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.14.0",
+    "@netlify/plugin-nextjs": "^5.8.1",
     "@shikijs/twoslash": "^1.22.2",
     "@slicemachine/adapter-next": "^0.3.55",
     "@types/eslint__js": "^8.42.3",
