@@ -1,9 +1,10 @@
-import { PrismicImage, SliceZone } from '@prismicio/react';
+import { PrismicRichText, SliceZone } from '@prismicio/react';
+import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { NextResponse } from 'next/server';
-import { ProjectsDocumentData } from 'prismicio-types';
 
-import { ScreenshotView } from '@/components/ScreenshotView';
+import { findSlice } from '@/app/utils/findSlice';
+import { AppIcon } from '@/components/AppIcon';
 import { createClient } from '@/prismicio';
 import { components } from '@/slices';
 
@@ -31,15 +32,9 @@ export default async function Page(props: {
   }
 
   const client = createClient();
-  const showcase = await client
-    .getByUID('showcase', uid, {
-      fetchLinks: 'projects.slices',
-    })
-    .catch(() => notFound());
-
-  const project = showcase.data.project_link as unknown as {
-    data: Pick<ProjectsDocumentData, 'slices'>;
-  };
+  const page = await client.getByUID('projects', uid).catch(() => notFound());
+  const icon = findSlice(page, 'app_icon');
+  // console.log('page', page);
 
   // const project = await client.getByUID('projects', showcase.data.project_link, {
   //   fetchLinks: 'projects.slices',
@@ -52,26 +47,51 @@ export default async function Page(props: {
     <main>
       <div className={styles.screen}>
         <div className={styles.info}>
-          {project ? <ScreenshotView slices={project.data.slices} /> : null}
-
+          {/*{project ? <ScreenshotView slices={project.data.slices} /> : null}*/}
           <div className={styles.titleRow}>
-            <PrismicImage
-              className={styles.projectIcon}
-              field={showcase?.data.icon}
-            />
-            <h3>{showcase?.data.title}</h3>
+            {icon && <AppIcon slice={icon} className={styles.projectIcon} />}
+            <div>{page?.data.title}</div>
           </div>
-          <img
-            className={styles.platform}
-            src={'/api/platform/' + showcase.uid}
-          />
-
+          <PrismicRichText field={page?.data.description} />
+          {/*<img className={styles.platform} src={'/api/platform/' + page.uid} />*/}
           {/*<ProjectImage slice={showcase.data.project_link} index={0} slices={} context={}*/}
           {/*<PrismicImage field={showcase.data.preview} />*/}
-
-          <SliceZone slices={showcase?.data.slices} components={components} />
+          {/*<SliceZone slices={showcase?.data.slices} components={components} />*/}
+        </div>
+        <div className={styles.slices}>
+          <SliceZone slices={page.data.slices} components={components} />
         </div>
       </div>
     </main>
   );
+}
+
+type Params = { uid: string };
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<Params>;
+}): Promise<Metadata> {
+  const { uid } = await params;
+
+  const client = createClient();
+
+  const page = await client.getByUID('projects', uid).catch(() => notFound());
+
+  return {
+    title: page.data.meta_title,
+
+    description: page.data.meta_description,
+  };
+}
+
+export async function generateStaticParams() {
+  const client = createClient();
+
+  const pages = await client.getAllByType('projects');
+
+  return pages.map((page) => {
+    return { uid: page.uid };
+  });
 }

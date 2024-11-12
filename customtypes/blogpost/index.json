@@ -33,9 +33,6 @@
           "choices": {
             "text_block": {
               "type": "SharedSlice"
-            },
-            "embed": {
-              "type": "SharedSlice"
             }
           }
         }

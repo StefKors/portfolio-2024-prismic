@@ -16,7 +16,7 @@ export async function GET(
 ) {
   const { uid } = await params;
   const client = createClient('portfolio-stefkors');
-  const page = await client.getByUID('showcase', uid).catch(() => {
+  const page = await client.getByUID('projects', uid).catch(() => {
     return notFound();
   });
 
@@ -37,7 +37,7 @@ export async function GET(
 
 export async function generateStaticParams() {
   const client = createClient('portfolio-stefkors');
-  const pages = await client.getAllByType('showcase');
+  const pages = await client.getAllByType('projects');
 
   return pages.map((page) => {
     return { uid: page.uid };

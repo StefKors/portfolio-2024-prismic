@@ -6,11 +6,20 @@ import styles from './AppIcon.module.css';
 
 interface AppIconProps extends React.HTMLProps<HTMLDivElement> {
   slice?: ProjectsDocumentDataSlicesSlice;
+  showBackground?: boolean;
 }
 
-export const AppIcon = ({ slice, className, ...props }: AppIconProps) => {
+export const AppIcon = ({
+  slice,
+  showBackground,
+  className,
+  ...props
+}: AppIconProps) => {
   return (
-    <div className={`${styles.appIconGridCell} ${className}`} {...props}>
+    <div
+      className={`${styles.appIconGridCell} ${showBackground ? styles.background : null} ${className}`}
+      {...props}
+    >
       <div className={styles.appIconWrapper}>
         <PrismicImage
           // @ts-ignore

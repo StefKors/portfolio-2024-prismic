@@ -4,116 +4,7 @@ import type * as prismic from '@prismicio/client';
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
-type ApplicationDocumentDataSlicesSlice = never;
-
-/**
- * Content for Application documents
- */
-interface ApplicationDocumentData {
-  /**
-   * Url field in *Application*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: application.url
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  url: prismic.LinkField;
-
-  /**
-   * Name field in *Application*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: application.name
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  name: prismic.KeyTextField;
-
-  /**
-   * Icon field in *Application*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: application.icon
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  icon: prismic.ImageField<never>;
-
-  /**
-   * Published At field in *Application*
-   *
-   * - **Field Type**: Date
-   * - **Placeholder**: *None*
-   * - **API ID Path**: application.published_at
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#date
-   */
-  published_at: prismic.DateField;
-
-  /**
-   * Slice Zone field in *Application*
-   *
-   * - **Field Type**: Slice Zone
-   * - **Placeholder**: *None*
-   * - **API ID Path**: application.slices[]
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#slices
-   */
-  slices: prismic.SliceZone<ApplicationDocumentDataSlicesSlice> /**
-   * Meta Description field in *Application*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: A brief summary of the page
-   * - **API ID Path**: application.meta_description
-   * - **Tab**: SEO & Metadata
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */;
-  meta_description: prismic.KeyTextField;
-
-  /**
-   * Meta Image field in *Application*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: application.meta_image
-   * - **Tab**: SEO & Metadata
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  meta_image: prismic.ImageField<never>;
-
-  /**
-   * Meta Title field in *Application*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: A title of the page used for social media and search engines
-   * - **API ID Path**: application.meta_title
-   * - **Tab**: SEO & Metadata
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  meta_title: prismic.KeyTextField;
-}
-
-/**
- * Application document from Prismic
- *
- * - **API ID**: `application`
- * - **Repeatable**: `true`
- * - **Documentation**: https://prismic.io/docs/custom-types
- *
- * @typeParam Lang - Language API ID of the document.
- */
-export type ApplicationDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithUID<
-    Simplify<ApplicationDocumentData>,
-    'application',
-    Lang
-  >;
-
-type BlogpostDocumentDataSlicesSlice = TextBlockSlice | EmbedSlice;
+type BlogpostDocumentDataSlicesSlice = TextBlockSlice;
 
 /**
  * Content for BlogPost documents
@@ -519,7 +410,125 @@ interface JobDocumentData {
 export type JobDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<JobDocumentData>, 'job', Lang>;
 
+type NavigationDocumentDataSlicesSlice = NavigationItemSlice;
+
+/**
+ * Content for Navigation documents
+ */
+interface NavigationDocumentData {
+  /**
+   * Name field in *Navigation*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Name of the navigation list
+   * - **API ID Path**: navigation.name
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * Slice Zone field in *Navigation*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<NavigationDocumentDataSlicesSlice>;
+}
+
+/**
+ * Navigation document from Prismic
+ *
+ * - **API ID**: `navigation`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type NavigationDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<NavigationDocumentData>,
+    'navigation',
+    Lang
+  >;
+
+/**
+ * Item in *Project → Platform Support*
+ */
+export interface ProjectsDocumentDataPlatformSupportItem {
+  /**
+   * MacOS field in *Project → Platform Support*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: projects.platform_support[].macos
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  macos: prismic.BooleanField;
+
+  /**
+   * iOS field in *Project → Platform Support*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: projects.platform_support[].ios
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  ios: prismic.BooleanField;
+
+  /**
+   * iPadOS field in *Project → Platform Support*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: projects.platform_support[].ipados
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  ipados: prismic.BooleanField;
+
+  /**
+   * tvOS field in *Project → Platform Support*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: projects.platform_support[].tvos
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  tvos: prismic.BooleanField;
+
+  /**
+   * WatchOS field in *Project → Platform Support*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: projects.platform_support[].watchos
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  watchos: prismic.BooleanField;
+
+  /**
+   * VisionOS field in *Project → Platform Support*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: projects.platform_support[].visionos
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  visionos: prismic.BooleanField;
+}
+
 type ProjectsDocumentDataSlicesSlice =
+  | TextBlockSlice
+  | FeatureBlocksSlice
   | AppIconSlice
   | ProjectImageSlice
   | AppWindowScreenshotSlice;
@@ -584,6 +593,19 @@ interface ProjectsDocumentData {
   tech: prismic.KeyTextField;
 
   /**
+   * Platform Support field in *Project*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: projects.platform_support[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  platform_support: prismic.GroupField<
+    Simplify<ProjectsDocumentDataPlatformSupportItem>
+  >;
+
+  /**
    * Slice Zone field in *Project*
    *
    * - **Field Type**: Slice Zone
@@ -642,207 +664,13 @@ export type ProjectsDocument<Lang extends string = string> =
     Lang
   >;
 
-/**
- * Item in *Showcase → Platform Support*
- */
-export interface ShowcaseDocumentDataPlatformSupportItem {
-  /**
-   * MacOS field in *Showcase → Platform Support*
-   *
-   * - **Field Type**: Boolean
-   * - **Placeholder**: *None*
-   * - **Default Value**: false
-   * - **API ID Path**: showcase.platform_support[].macos
-   * - **Documentation**: https://prismic.io/docs/field#boolean
-   */
-  macos: prismic.BooleanField;
-
-  /**
-   * iOS field in *Showcase → Platform Support*
-   *
-   * - **Field Type**: Boolean
-   * - **Placeholder**: *None*
-   * - **Default Value**: false
-   * - **API ID Path**: showcase.platform_support[].ios
-   * - **Documentation**: https://prismic.io/docs/field#boolean
-   */
-  ios: prismic.BooleanField;
-
-  /**
-   * iPadOS field in *Showcase → Platform Support*
-   *
-   * - **Field Type**: Boolean
-   * - **Placeholder**: *None*
-   * - **Default Value**: false
-   * - **API ID Path**: showcase.platform_support[].ipados
-   * - **Documentation**: https://prismic.io/docs/field#boolean
-   */
-  ipados: prismic.BooleanField;
-
-  /**
-   * tvOS field in *Showcase → Platform Support*
-   *
-   * - **Field Type**: Boolean
-   * - **Placeholder**: *None*
-   * - **Default Value**: false
-   * - **API ID Path**: showcase.platform_support[].tvos
-   * - **Documentation**: https://prismic.io/docs/field#boolean
-   */
-  tvos: prismic.BooleanField;
-
-  /**
-   * WatchOS field in *Showcase → Platform Support*
-   *
-   * - **Field Type**: Boolean
-   * - **Placeholder**: *None*
-   * - **Default Value**: false
-   * - **API ID Path**: showcase.platform_support[].watchos
-   * - **Documentation**: https://prismic.io/docs/field#boolean
-   */
-  watchos: prismic.BooleanField;
-
-  /**
-   * VisionOS field in *Showcase → Platform Support*
-   *
-   * - **Field Type**: Boolean
-   * - **Placeholder**: *None*
-   * - **Default Value**: false
-   * - **API ID Path**: showcase.platform_support[].visionos
-   * - **Documentation**: https://prismic.io/docs/field#boolean
-   */
-  visionos: prismic.BooleanField;
-}
-
-type ShowcaseDocumentDataSlicesSlice = TextBlockSlice | FeatureBlocksSlice;
-
-/**
- * Content for Showcase documents
- */
-interface ShowcaseDocumentData {
-  /**
-   * Title field in *Showcase*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: showcase.title
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  title: prismic.KeyTextField;
-
-  /**
-   * Project Link field in *Showcase*
-   *
-   * - **Field Type**: Content Relationship
-   * - **Placeholder**: *None*
-   * - **API ID Path**: showcase.project_link
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  project_link: prismic.ContentRelationshipField<'projects'>;
-
-  /**
-   * Icon field in *Showcase*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: showcase.icon
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  icon: prismic.ImageField<never>;
-
-  /**
-   * Preview field in *Showcase*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: showcase.preview
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  preview: prismic.ImageField<never>;
-
-  /**
-   * Platform Support field in *Showcase*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: showcase.platform_support[]
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  platform_support: prismic.GroupField<
-    Simplify<ShowcaseDocumentDataPlatformSupportItem>
-  >;
-
-  /**
-   * Slice Zone field in *Showcase*
-   *
-   * - **Field Type**: Slice Zone
-   * - **Placeholder**: *None*
-   * - **API ID Path**: showcase.slices[]
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#slices
-   */
-  slices: prismic.SliceZone<ShowcaseDocumentDataSlicesSlice> /**
-   * Meta Description field in *Showcase*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: A brief summary of the page
-   * - **API ID Path**: showcase.meta_description
-   * - **Tab**: SEO & Metadata
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */;
-  meta_description: prismic.KeyTextField;
-
-  /**
-   * Meta Image field in *Showcase*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: showcase.meta_image
-   * - **Tab**: SEO & Metadata
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  meta_image: prismic.ImageField<never>;
-
-  /**
-   * Meta Title field in *Showcase*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: A title of the page used for social media and search engines
-   * - **API ID Path**: showcase.meta_title
-   * - **Tab**: SEO & Metadata
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  meta_title: prismic.KeyTextField;
-}
-
-/**
- * Showcase document from Prismic
- *
- * - **API ID**: `showcase`
- * - **Repeatable**: `true`
- * - **Documentation**: https://prismic.io/docs/custom-types
- *
- * @typeParam Lang - Language API ID of the document.
- */
-export type ShowcaseDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithUID<
-    Simplify<ShowcaseDocumentData>,
-    'showcase',
-    Lang
-  >;
-
 export type AllDocumentTypes =
-  | ApplicationDocument
   | BlogpostDocument
   | EventsDocument
   | HomepageDocument
   | JobDocument
-  | ProjectsDocument
-  | ShowcaseDocument;
+  | NavigationDocument
+  | ProjectsDocument;
 
 /**
  * Primary content in *AppIcon → Default → Primary*
@@ -956,33 +784,6 @@ export type AppWindowScreenshotSlice = prismic.SharedSlice<
 >;
 
 /**
- * Default variation for GistEmbed Slice
- *
- * - **API ID**: `default`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type EmbedSliceDefault = prismic.SharedSliceVariation<
-  'default',
-  Record<string, never>,
-  never
->;
-
-/**
- * Slice variation for *GistEmbed*
- */
-type EmbedSliceVariation = EmbedSliceDefault;
-
-/**
- * GistEmbed Shared Slice
- *
- * - **API ID**: `embed`
- * - **Description**: Embed
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type EmbedSlice = prismic.SharedSlice<'embed', EmbedSliceVariation>;
-
-/**
  * Primary content in *FeatureBlocks → Items*
  */
 export interface FeatureBlocksSliceDefaultItem {
@@ -1045,6 +846,78 @@ type FeatureBlocksSliceVariation = FeatureBlocksSliceDefault;
 export type FeatureBlocksSlice = prismic.SharedSlice<
   'feature_blocks',
   FeatureBlocksSliceVariation
+>;
+
+/**
+ * Item in *NavigationItem → Default → Primary → child link*
+ */
+export interface NavigationItemSliceDefaultPrimaryChildLinkItem {
+  /**
+   * link field in *NavigationItem → Default → Primary → child link*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation_item.default.primary.child_link[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField;
+}
+
+/**
+ * Primary content in *NavigationItem → Default → Primary*
+ */
+export interface NavigationItemSliceDefaultPrimary {
+  /**
+   * link field in *NavigationItem → Default → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation_item.default.primary.link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField;
+
+  /**
+   * child link field in *NavigationItem → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation_item.default.primary.child_link[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  child_link: prismic.GroupField<
+    Simplify<NavigationItemSliceDefaultPrimaryChildLinkItem>
+  >;
+}
+
+/**
+ * Default variation for NavigationItem Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type NavigationItemSliceDefault = prismic.SharedSliceVariation<
+  'default',
+  Simplify<NavigationItemSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *NavigationItem*
+ */
+type NavigationItemSliceVariation = NavigationItemSliceDefault;
+
+/**
+ * NavigationItem Shared Slice
+ *
+ * - **API ID**: `navigation_item`
+ * - **Description**: NavigationItem
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type NavigationItemSlice = prismic.SharedSlice<
+  'navigation_item',
+  NavigationItemSliceVariation
 >;
 
 /**
@@ -1158,9 +1031,6 @@ declare module '@prismicio/client' {
 
   namespace Content {
     export type {
-      ApplicationDocument,
-      ApplicationDocumentData,
-      ApplicationDocumentDataSlicesSlice,
       BlogpostDocument,
       BlogpostDocumentData,
       BlogpostDocumentDataSlicesSlice,
@@ -1173,13 +1043,13 @@ declare module '@prismicio/client' {
       JobDocument,
       JobDocumentData,
       JobDocumentDataSlicesSlice,
+      NavigationDocument,
+      NavigationDocumentData,
+      NavigationDocumentDataSlicesSlice,
       ProjectsDocument,
       ProjectsDocumentData,
+      ProjectsDocumentDataPlatformSupportItem,
       ProjectsDocumentDataSlicesSlice,
-      ShowcaseDocument,
-      ShowcaseDocumentData,
-      ShowcaseDocumentDataPlatformSupportItem,
-      ShowcaseDocumentDataSlicesSlice,
       AllDocumentTypes,
       AppIconSlice,
       AppIconSliceDefaultPrimary,
@@ -1189,13 +1059,15 @@ declare module '@prismicio/client' {
       AppWindowScreenshotSliceDefaultPrimary,
       AppWindowScreenshotSliceVariation,
       AppWindowScreenshotSliceDefault,
-      EmbedSlice,
-      EmbedSliceVariation,
-      EmbedSliceDefault,
       FeatureBlocksSlice,
       FeatureBlocksSliceDefaultItem,
       FeatureBlocksSliceVariation,
       FeatureBlocksSliceDefault,
+      NavigationItemSlice,
+      NavigationItemSliceDefaultPrimaryChildLinkItem,
+      NavigationItemSliceDefaultPrimary,
+      NavigationItemSliceVariation,
+      NavigationItemSliceDefault,
       ProjectImageSlice,
       ProjectImageSliceDefaultItem,
       ProjectImageSliceVariation,

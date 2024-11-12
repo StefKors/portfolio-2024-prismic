@@ -2,6 +2,8 @@ import { Content } from '@prismicio/client';
 import { SliceComponentProps } from '@prismicio/react';
 import type { JSX } from 'react';
 
+import { AppScreen } from '@/components/AppScreen';
+
 /**
  * Props for `AppWindowScreenshot`.
  */
@@ -14,15 +16,7 @@ export type AppWindowScreenshotProps =
 const AppWindowScreenshot = ({
   slice,
 }: AppWindowScreenshotProps): JSX.Element => {
-  return (
-    <section
-      data-slice-type={slice.slice_type}
-      data-slice-variation={slice.variation}
-    >
-      Placeholder component for text_block2 (variation: {slice.variation})
-      Slices
-    </section>
-  );
+  return <AppScreen slice={slice} />;
 };
 
 export default AppWindowScreenshot;

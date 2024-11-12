@@ -1,5 +1,9 @@
+import { AppScreensOverview } from '@/components/AppScreensOverview';
+import { ArticleList } from '@/components/ArticleList';
 import { ProjectGrid } from '@/components/ProjectGrid';
 import { createClient } from '@/prismicio';
+
+import styles from './page.module.css';
 
 export default async function Home() {
   const client = createClient();
@@ -19,11 +23,11 @@ export default async function Home() {
 
   return (
     <main>
-      {/*<div className={styles.homeHeader}>*/}
-      {/*  {appPreviews && <ShowcaseOverview appPreviews={appPreviews} />}*/}
-      {/*  <div className={styles.inset}></div>*/}
-      {/*</div>*/}
-      {/*<ArticleList />*/}
+      <div className={styles.homeHeader}>
+        {appPreviews && <AppScreensOverview appPreviews={appPreviews} />}
+        <div className={styles.inset}></div>
+      </div>
+      <ArticleList />
       {appPreviews && <ProjectGrid appPreviews={appPreviews} />}
     </main>
   );

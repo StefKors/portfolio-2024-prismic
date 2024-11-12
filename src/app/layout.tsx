@@ -4,6 +4,7 @@ import './globals.css';
 import { PrismicPreview } from '@prismicio/next';
 import { ReactNode } from 'react';
 
+import { Navigation } from '@/components/Navigation';
 import { repositoryName } from '@/prismicio';
 
 // export const metadata: Metadata = {
@@ -19,6 +20,7 @@ export default function RootLayout({
   return (
     <html lang={'en'}>
       <body>
+        <Navigation />
         {children}
         <PrismicPreview repositoryName={repositoryName} />
       </body>

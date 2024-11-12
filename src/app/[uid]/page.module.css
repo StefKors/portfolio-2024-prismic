@@ -1,15 +1,20 @@
 .screen {
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  max-width: 800px;
+  flex-direction: row;
+  gap: 2rem;
+  max-width: 1200px;
   position: relative;
   cursor: pointer;
   margin: 200px auto;
 }
 
+.slices {
+  max-width: 600px;
+}
+
 .platform {
   height: 1.5rem;
+  width: unset;
 }
 
 .icon {
@@ -55,22 +60,25 @@
 .info {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   gap: 0.5rem;
+  max-width: 48ch;
 }
 
 .info .projectIcon {
-  width: 3.8rem;
-  height: 3.8rem;
+  width: 1.35rem;
+  height: 1.35rem;
 }
 
 .info .titleRow {
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
-  align-items: center;
-  justify-content: center;
+  /*align-items: center;*/
+  /*justify-content: center;*/
   width: 100%;
   text-align: center;
+  color: var(--color);
 }
 
 .info h3 {

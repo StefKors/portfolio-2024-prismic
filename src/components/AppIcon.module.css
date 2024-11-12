@@ -4,16 +4,23 @@
   align-items: center;
   width: 80px;
   height: 80px;
+
+  &.background .appIconWrapper {
+    background-color: #ffffff40;
+  }
+
+  .appIconWrapper {
+    padding: 0;
+    border-radius: 25%;
+
+    .appIcon {
+      width: 100%;
+      display: block;
+      pointer-events: none;
+    }
+
+  }
 }
 
-.appIconWrapper {
-  background-color: #ffffff40;
-  padding: 0;
-  border-radius: 25%;
-}
 
-.appIcon {
-  width: 100%;
-  display: block;
-  pointer-events: none;
-}
+

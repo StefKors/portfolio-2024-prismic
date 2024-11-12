@@ -50,11 +50,79 @@
           "placeholder": ""
         }
       },
+      "platform_support": {
+        "type": "Group",
+        "config": {
+          "label": "Platform Support",
+          "fields": {
+            "macos": {
+              "type": "Boolean",
+              "config": {
+                "label": "MacOS",
+                "default_value": false,
+                "placeholder_true": "true",
+                "placeholder_false": "false"
+              }
+            },
+            "ios": {
+              "type": "Boolean",
+              "config": {
+                "label": "iOS",
+                "default_value": false,
+                "placeholder_true": "true",
+                "placeholder_false": "false"
+              }
+            },
+            "ipados": {
+              "type": "Boolean",
+              "config": {
+                "label": "iPadOS",
+                "default_value": false,
+                "placeholder_true": "true",
+                "placeholder_false": "false"
+              }
+            },
+            "tvos": {
+              "type": "Boolean",
+              "config": {
+                "label": "tvOS",
+                "default_value": false,
+                "placeholder_true": "true",
+                "placeholder_false": "false"
+              }
+            },
+            "watchos": {
+              "type": "Boolean",
+              "config": {
+                "label": "WatchOS",
+                "default_value": false,
+                "placeholder_true": "true",
+                "placeholder_false": "false"
+              }
+            },
+            "visionos": {
+              "type": "Boolean",
+              "config": {
+                "label": "VisionOS",
+                "default_value": false,
+                "placeholder_true": "true",
+                "placeholder_false": "false"
+              }
+            }
+          }
+        }
+      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "text_block": {
+              "type": "SharedSlice"
+            },
+            "feature_blocks": {
+              "type": "SharedSlice"
+            },
             "app_icon": {
               "type": "SharedSlice"
             },

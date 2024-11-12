@@ -1,6 +1,8 @@
 import { Content } from '@prismicio/client';
-import { SliceComponentProps } from '@prismicio/react';
+import { PrismicImage, SliceComponentProps } from '@prismicio/react';
 import type { JSX } from 'react';
+
+import styles from '@/components/AppIcon.module.css';
 
 /**
  * Props for `ProjectImage`.
@@ -12,13 +14,16 @@ export type ProjectImageProps = SliceComponentProps<Content.ProjectImageSlice>;
  */
 const ProjectImage = ({ slice }: ProjectImageProps): JSX.Element => {
   return (
-    <section
-      data-slice-type={slice.slice_type}
-      data-slice-variation={slice.variation}
-    >
-      Placeholder component for text_block2 (variation: {slice.variation})
-      Slices
-    </section>
+    <PrismicImage
+      field={slice?.primary.url}
+      className={styles.appIcon}
+      imgixParams={{
+        q: 70,
+        w: 80,
+        fm: 'avif',
+        dpr: 2,
+      }}
+    />
   );
 };
 

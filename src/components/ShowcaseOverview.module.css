@@ -1,0 +1,85 @@
+.appScreensLayer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  z-index: 2;
+  row-gap: 10vh;
+
+}
+
+.showcase {
+  /*max-width: 600px;*/
+  overflow: clip;
+  height: 300px;
+  display: grid;
+  grid-template-columns: 300px 400px;
+
+  .desc {
+    display: flex;
+    flex-direction: column;
+    /*width: 142ch;*/
+  }
+}
+
+.backgroundTitle {
+  font-size: 5rem;
+  z-index: 0;
+}
+
+.backgroundTitle span {
+  opacity: 0.6;
+}
+
+.appIconsLayer {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  /*transform: rotate(-43deg);*/
+  transform-origin: center;
+  justify-content: center;
+  align-items: center;
+  align-content: space-between;
+  column-gap: 400px;
+  row-gap: 480px;
+  flex-wrap: wrap;
+  z-index: 999;
+  pointer-events: none;
+  overflow: clip;
+}
+
+.iconRotation {
+  /*transform: rotate(30deg);*/
+  transform-origin: center;
+}
+
+.box {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  width: 100vw;
+  height: 100vh;
+  align-content: center;
+  justify-content: space-evenly;
+  gap: 1rem;
+  grid-auto-flow: column;
+}
+
+.centerWrapper {
+  width: 130vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.appScreenClipWrapper {
+  height: 100vh;
+  width: 100vw;
+}
+
+.appScreenClipPositioner {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
